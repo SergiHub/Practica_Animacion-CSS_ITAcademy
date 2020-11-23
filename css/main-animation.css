@@ -1,0 +1,148 @@
+* {
+	box-sizing: border-box; /* Para que el contenido del hijo siempre entre dentro del padre, teniendo en cuenta el border y el padding (el margin no, porque es respecto a otros elementos) */
+}
+
+/* --- Bars --- */
+.vertical-bars__bar {
+	position: absolute; /* Colocar cada barra en una posición concreta respecto al container padre. En este caso, al no haber left/right/top/bottom, se colocará cada barra lo máximo arriba y a la izquierda del contenedor que debe ocupar */
+	width: 20%; /* Que cada elemento ocupe el 20% del total del contenedor (al ser 5, pues cada uno ocupará lo mismo*/
+	min-height: 100vh; /* Que cada barra ocupe el 100% del alto del viewport */
+	overflow: hidden; /* En caso de que sobresalga del contenido de la caja, esa parte no se verá */
+	cursor: pointer; /* Pra que al pasar el ratón por encima de cada barra aparezca la típica mano */
+}
+
+/* Desplazamos los elementos respecto a su posicion original (partiendo del lado izquierdo) (el nth-child sirve para hacer referencia a la barra que toca, ya que todas las barras comparten la misma clase (vertical-bars__bar) */
+.vertical-bars__bar:nth-child(1) {
+	left: 0;
+}
+.vertical-bars__bar:nth-child(2) {
+	left: 20vw;
+}
+.vertical-bars__bar:nth-child(3) {
+	left: 40vw;
+}
+.vertical-bars__bar:nth-child(4) {
+	left: 60vw;
+}
+.vertical-bars__bar:nth-child(5) {
+	left: 80vw;
+}
+
+/* --- Bar Content --- */
+
+.vertical-bars .bar__content {
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-fill-mode: both; /* la animación se producirá en ambas direcciones */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+/* aplicamos efectos 3D (de allí las 3 coordenadas) */
+.vertical-bars__bar:nth-child(1) .bar__content {
+	background: #244F75;
+	transform: translate3d(-100%, 0, 0);
+	animation-name: bar1;
+	animation-delay: 0.1s;
+}
+.vertical-bars__bar:nth-child(2) .bar__content {
+	background: #60BFBF;
+	transform: translate3d(0, 100%, 0);
+	animation-name: bar2;
+	animation-delay: 0.2s;
+}
+.vertical-bars__bar:nth-child(3) .bar__content {
+	background: #8C4B7E;
+	transform: translate3d(0, -100%, 0);
+	animation-name: bar3;
+	animation-delay: 0.3s;
+}
+.vertical-bars__bar:nth-child(4) .bar__content {
+	background: #F8BB44;
+	transform: translate3d(0, 100%, 0);
+	animation-name: bar4;
+	animation-delay: 0.4s;
+}
+.vertical-bars__bar:nth-child(5) .bar__content {
+	background: #F24B4B;
+	transform: translate3d(100%, 0, 0);
+	animation-name: bar5;
+	animation-delay: 0.5s;
+}
+
+.vertical-bars .bar__content:before {
+	content: ""; /* Especificar que la barra, antes, no contiene nada */
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: white;
+	opacity: 0.05;
+	transform: skew(30deg) scaleY(1) translate(0, 0); /* establecemos el ángulo del efecto de animación */
+	transition: all 0.6s linear; /* La transición se le aplica a todas las propiedades css (alto y ancho). Luego la duración de esta y su forma de verse (linear -misma velocidad de principio a fin-) */
+}
+
+.vertical-bars .bar__content:hover:before {
+	transform: skew(0deg) scale(3) translate(0, 0);
+	opacity: 0.1;
+}
+
+/* --- Bar Title --- */  
+
+.bar__title {
+	font-family: 'Lato';
+	font-size: 3.5vw;
+	color: white;
+	text-align: center;
+}
+
+/* --- Apply the animation --- */  
+  
+/* Se especifica a cada barra la translación de la animación, de principio a fin */
+@keyframes bar1 {
+	0% {
+	  transform: translate3d(-100%, 0, 0);
+	}
+	100% {
+	  transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes bar2 {
+	0% {
+	  transform: translate3d(0, 100%, 0);
+	}
+	100% {
+	  transform: translate3d(0, 0, 0);
+	}
+}
+  
+@keyframes bar3 {
+	0% {
+	  transform: translate3d(0, -100%, 0);
+	}
+	100% {
+	  transform: translate3d(0, 0, 0);
+	}
+}
+  
+@keyframes bar4 {
+	0% {
+	  transform: translate3d(0, 100%, 0);
+	}
+	100% {
+	  transform: translate3d(0, 0, 0);
+	}
+}
+  
+@keyframes bar5 {
+	0% {
+	  transform: translate3d(100%, 0, 0);
+	}
+	100% {
+	  transform: translate3d(0, 0, 0);
+	}
+}
